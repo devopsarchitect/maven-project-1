@@ -27,7 +27,8 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                        sh "scp -i /home/jenkins/tpsystemsarchitect **/target/*.war 
+						tpsystemsarchitect@${params.tomcat_dev}:/opt/bitnami/apache-tomcat/webapps"
                     }
                 }
 
