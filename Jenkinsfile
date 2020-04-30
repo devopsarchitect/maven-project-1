@@ -18,14 +18,13 @@ pipeline {
 				}
 			}
 
-				stage ('Deployments'){
+			stage ('Deployments'){
 					
-						stage ('Deploy to Staging'){
+				steps ('Deploy to Staging'){
 						
-							sshagent(['tpsystemsarchitect']) {
-							   sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
-							}
-						
+					sshagent(['tpsystemsarchitect']) {
+						sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
+					}				
 
 				   
 				}
