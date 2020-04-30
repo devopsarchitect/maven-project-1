@@ -23,21 +23,21 @@ stages{
             }
         }
 
-        stage ('Deployments'){
-            parallel{
-                stage ('Deploy to Staging'){
-                    steps {
-					sshagent(['tpsystemsarchitect']) {
-					// some block
-                       sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
-                    }
-                }
+			stage ('Deployments'){
+				parallel{
+					stage ('Deploy to Staging'){
+						steps {
+						sshagent(['tpsystemsarchitect']) {
+						// some block
+						   sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
+						}
+					}
 
-           //   stage ("Deploy to Production"){
-           //       steps {
-       //               sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war c2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
-            //      }
-               //
-           //    }
-    }
-}
+			   //   stage ("Deploy to Production"){
+			   //       steps {
+		   //               sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war c2-user@${params.tomcat_prod}:/var/lib/tomcat7/webapps"
+				//      }
+				   //
+			   //    }
+		}
+	 }
