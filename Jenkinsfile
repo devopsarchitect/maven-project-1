@@ -28,7 +28,6 @@ stages{
 					stage ('Deploy to Staging'){
 						steps {
 						sshagent(['tpsystemsarchitect']) {
-						// some block
 						   sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
 						}
 					}
@@ -40,4 +39,4 @@ stages{
 				   //
 			   //    }
 		}
-	 }
+	}
