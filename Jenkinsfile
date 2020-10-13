@@ -1,34 +1,36 @@
 pipeline {
     agent any
 
+    parameters {
+         string(name: 'tomcat_dev', defaultValue: '35.172.190.47', description: 'Staging Server')
+        
+                }
+
     triggers {
          pollSCM('* * * * *')
      }
 
-	stages{
-			stage('Build'){
-				steps {
-					sh 'mvn clean package'
-				}
-				post {
-					success {
-						echo 'Now Archiving...'
-						archiveArtifacts artifacts: '**/target/*.war'
-					}
-				}
-			}
+stages{
+        stage('Build'){
+            steps {
+                sh 'mvn clean package'
+            }
+            post {
+                success {
+                    echo 'Now Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }
 
-			stage ('Deployments'){
-					
-				steps ('Deploy to Staging'){
-						
-					sshagent(['tpsystemsarchitect']) {
-						sh 'scp -o StrictHostKeyChecking=no target/*.war tpsystemsarchitect@34.68.242.174:/opt/bitnami/apache-tomcat/webapps'
-					}				
-
-				   
-				}
-			}
-		}
-	
-	}
+        stage ('Deployments'){
+            parallel{
+                stage ('Deploy to Staging'){
+                    steps {
+                        sh "scp -i /home/jenkins/tomcat-demo.pem **/target/*.war ec2-user@${params.tomcat_dev}:/var/lib/tomcat7/webapps"
+                    }
+                }
+            }
+        }
+    }
+}
