@@ -31,9 +31,10 @@ stages{
                         //cd "/var/snap/jenkins/1416/jobs/Pipeline-as-Code-maven-project-0.4-tag/workspace/"
                         dir("${env.WORKSPACE}/"){
                             sh "pwd"
+                             sh "scp -i tomcat-demo.pem **/target/*.war ubuntu@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                                 }
                         
-                       // sh "scp -i tomcat-demo.pem **/target/*.war ubuntu@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
+                       
                     }
                 }
             }
