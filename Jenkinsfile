@@ -31,6 +31,7 @@ stages{
                         //cd "/var/snap/jenkins/1416/jobs/Pipeline-as-Code-maven-project-0.4-tag/workspace/"
                         dir("${env.WORKSPACE}/"){
                             sh "pwd"
+                            sh "ssh -o StrictHostKeyChecking=no -i tomcat-demo.pem ubuntu@${params.tomcat_dev} uptime"
                              sh "scp -i tomcat-demo.pem **/target/*.war ubuntu@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                                 }
                         
