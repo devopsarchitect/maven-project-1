@@ -28,6 +28,7 @@ stages{
                 stage ('Deploy to Staging'){
                     steps {
                         sh "pwd"
+                        cd "/var/snap/jenkins/1416/jobs/Pipeline-as-Code-maven-project-0.4-tag/workspace/"
                         sh "scp -i /var/snap/jenkins/1416/jobs/Pipeline-as-Code-maven-project-0.4-tag/workspace/tomcat-demo.pem **/target/*.war ubuntu@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
