@@ -27,6 +27,7 @@ stages{
             parallel{
                 stage ('Deploy to Staging'){
                     steps {
+                        sh "pwd"
                         sh "scp -i /var/lib/jenkins/tomcat-demo.pem **/target/*.war ubuntu@${params.tomcat_dev}:/var/lib/tomcat8/webapps"
                     }
                 }
